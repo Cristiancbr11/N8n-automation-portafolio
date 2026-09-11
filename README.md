@@ -1,34 +1,32 @@
-# N8n Automation Portfolio
+# Portafolio de Automatización e Integración con n8n
 
-Portfolio of automation and integration projects developed with n8n.
+Repositorio oficial de proyectos de automatización de flujos de trabajo, integración de APIs y mensajería multicanal sobre infraestructura basada en contenedores.
 
-This repository documents my learning process and practical projects focused on workflow automation, API integration, databases, and deployment.
+---
 
-## 🚀 Projects
+## 🛠️ Infraestructura y Tecnologías
 
-| Project | Technologies | Status |
-|---|---|---|
-| Basic Automation | n8n, Google Sheets, Gmail | 🔄 In Progress |
-| API Integration | n8n, REST APIs | 📌 Planned |
-| Webhook Automation | n8n, Webhooks, JavaScript | 📌 Planned |
-| Production Deployment | n8n, Docker, PostgreSQL, VPS | 📌 Planned |
+* **Core Engine:** n8n (Self-hosted sobre Docker & WSL2)
+* **Control de Versiones:** Git & GitHub Desktop
+* **Autenticación:** Service Accounts (Google Cloud Platform) M2M, Telegram Bot API
+* **Persistencia & Notificaciones:** Google Sheets API, Telegram API
 
-## 🛠️ Technologies
+---
 
-- n8n
-- REST APIs
-- Webhooks
-- JavaScript
-- SQL
-- PostgreSQL
-- Docker
-- Linux
-- VPS
+## 🚀 Proyectos Implementados
 
-## 🎯 Objective
+### 🟢 Proyecto 1: Sistema de Captura y Validación de Leads
+* **Carpeta:** `/project-1-lead-capture`
+* **Descripción:** Pipeline de ingesta de datos con interfaz web, lógica condicional para filtrado de registros corruptos/inválidos y persistencia directa en hojas de cálculo empresarial mediante autenticación M2M.
 
-Build practical automation solutions while developing skills in workflow automation, system integration, backend technologies, and deployment.
+### 🟢 Proyecto 2: Sistema de Notificaciones Multicanal en Tiempo Real (Telegram)
+* **Carpeta:** `/project-2-telegram-notifications`
+* **Descripción:** Extensión de la arquitectura de captura mediante la integración de la API de Telegram. Permite el monitoreo activo mediante alertas formateadas e instantáneas al teléfono del equipo técnico/comercial ante cada nuevo registro válido.
 
-## 📚 Learning
+---
 
-This repository is part of my practical learning journey with n8n. Each project increases in complexity and introduces new concepts and technologies.
+## 💼 Enfoque para Entrevistas Técnicas (STAR)
+
+* **Situación / Tarea:** Requerimiento de monitoreo inmediato para reducir el tiempo de respuesta (*Speed-to-lead*) a clientes potenciales.
+* **Acción:** Integración de nodos de mensajería API con plantillas HTML/Markdown de respuesta dinámica basadas en los atributos del payload de la consulta.
+* **Resultado:** Reducción del tiempo de notificación a **< 1 segundo** tras la validación de los datos.
