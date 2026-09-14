@@ -1,24 +1,23 @@
-# 🚀 Portafolio de Automatizaciones con n8n
+# 🚀 N8n Automation Portfolio
 
-Bienvenido a mi portafolio de automatización de flujos de trabajo con **n8n**. En este repositorio documento proyectos prácticos enfocados en la integración de APIs, Inteligencia Artificial, gestión de bases de datos y herramientas de productividad para optimizar procesos operativos.
+Bienvenido a mi portafolio de automatización de flujos de trabajo construidos con **n8n**. Este repositorio recopila proyectos prácticos enfocados en la integración de APIs, Inteligencia Artificial (LLMs), gestión de bases de datos y enrutamiento inteligente de datos para optimizar procesos operativos y de soporte.
 
 ---
 
-## 📚 Proyectos Incluidos
+## 📌 Tabla de Proyectos
 
-| # | Proyecto | Descripción | Tecnologías Clave | Estado |
+| # | Proyecto | Descripción | Tecnologías / Integraciones | Estado |
 |---|---|---|---|---|
-| **01** | **[Telegram & OpenAI Integration](./project-1-telegram-bot/)** | Bot interactivo en Telegram asistido por IA para responder consultas de usuarios en tiempo real. | `n8n`, `Telegram API`, `OpenAI` | 🟢 Completado |
-| **02** | **[Automated Form & Database Sync](./project-2-form-to-sheets/)** | Captura de datos mediante formularios web y sincronización automática en Google Sheets con notificaciones. | `n8n`, `HTML Forms`, `Google Sheets API` | 🟢 Completado |
-| **03** | **[AI-Powered Webhook & Ticket Router](./project-3-ai-webhook-automation/)** | Clasificación inteligente de solicitudes entrantes vía Webhook usando LLMs y enrutamiento dinámico (Gmail para urgencia ALTA, Google Sheets para NORMAL). | `n8n`, `Webhooks`, `Groq / OpenAI`, `Gmail API`, `Google Sheets` | 🟢 Completado |
+| 01 | **[Telegram AI Assistant](./project-1-telegram-bot/)** | Bot interactivo en Telegram con Inteligencia Artificial para responder consultas en tiempo real. | `n8n`, `Telegram API`, `OpenAI` | 🟢 Completado |
+| 02 | **[Form to Google Sheets Sync](./project-2-form-to-sheets/)** | Captura de leads mediante formularios y sincronización dinámica en Google Sheets con alertas. | `n8n`, `HTML Forms`, `Google Sheets API` | 🟢 Completado |
+| 03 | **[AI-Powered Webhook & Ticket Router](./project-3-ai-webhook-automation/)** | Enrutamiento inteligente de tickets mediante Webhook e IA (Gmail para urgencia ALTA, Google Sheets para NORMAL). | `n8n`, `Webhooks`, `Groq / LLM`, `Gmail`, `Google Sheets` | 🟢 Completado |
 
 ---
 
-## 🛠️ Proyecto 3: Procesador Inteligente de Webhooks & Enrutamiento de Tickets
+## ⚙️ Requisitos Generales e Instalación
 
-### 📌 Arquitectura del Flujo
+Para ejecutar cualquiera de estos flujos localmente en tu entorno de n8n:
 
-```text
-[ Webhook POST ] ──> [ IA (Groq / LLM) ] ──> [ Edit Fields ] ──> [ Switch ]
-                                                                   ├── (Urgencia ALTA)   ──> [ Gmail ]
-                                                                   └── (Urgencia NORMAL) ──> [ Google Sheets ]
+1. **Clonar este repositorio:**
+   ```bash
+   git clone [https://github.com/Cristiancbr11/N8n-automation-portafolio.git](https://github.com/Cristiancbr11/N8n-automation-portafolio.git)
