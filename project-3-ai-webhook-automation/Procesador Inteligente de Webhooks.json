@@ -1,0 +1,314 @@
+{
+  "name": "Procesador Inteligente de Webhooks.",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "inbound-lead",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "efb7f2cb-391d-46e3-b6cb-bf6da006a620",
+      "name": "Webhook",
+      "webhookId": "73a3c53a-3534-4121-95b4-e2769a66742e"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"openai/gpt-oss-20b\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Analiza la siguiente consulta y responde EXCLUSIVAMENTE en formato JSON estricto sin markdown: {\\\"urgencia\\\": \\\"ALTA|MEDIA|BAJA\\\", \\\"categoria\\\": \\\"Soporte Tecnico|Ventas|Consulta General\\\", \\\"resumen\\\": \\\"1 frase con el problema\\\"}. Mensaje: {{ $json.body.mensaje }}\"\n    }\n  ],\n  \"response_format\": { \"type\": \"json_object\" }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "909ad658-95dc-4197-abda-192a71c8a9b0",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "yaqHph3XkwoUQ81t",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c910f1db-52d8-475e-8a69-691e832eb704",
+              "name": "resultado",
+              "value": "={{ JSON.parse($json.choices[0].message.content) }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        448,
+        0
+      ],
+      "id": "cdee7ae3-18d3-46f6-8749-5b2ac7beded3",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.resultado.urgencia }}",
+                    "rightValue": "ALTA",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "714fbc18-cf27-40bd-9f90-16e939b4d1ae"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Urgencia ALTA"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "f1c98b30-3e11-4033-ac71-5ec445524f98",
+                    "leftValue": "={{ $json.resultado.urgencia }}",
+                    "rightValue": "ALTA",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEquals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Urgencia Normal"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        672,
+        0
+      ],
+      "id": "b03740d1-6e3c-4d65-ab03-75ec49f95879",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "sendTo": "cristiancbr2119@gmail.com",
+        "subject": "=🚨 ALERTA CRÍTICA: Ticket de {{ $json.resultado.categoria }}",
+        "message": "=<h2>🚨 Notificación de Incidencia de Urgencia ALTA</h2> <p>Se ha recibido una nueva solicitud prioritaria que requiere atención inmediata.</p>  <hr>  <ul>   <li><strong>Categoría:</strong> {{ $json.resultado.categoria }}</li>   <li><strong>Urgencia:</strong> {{ $json.resultado.urgencia }}</li>   <li><strong>Resumen de la IA:</strong> {{ $json.resultado.resumen }}</li> </ul>  <hr>  <p><em>Mensaje original del usuario:</em></p> <blockquote>   {{ $('Webhook').item.json.body.mensaje }} </blockquote>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        896,
+        -96
+      ],
+      "id": "d2531385-cd18-48e0-b91e-e981664a3fb7",
+      "name": "Send a message",
+      "webhookId": "791b9317-3e30-4f60-af96-7017299f84c6",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "ePdDvmjfhiM9gSSQ",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1y3QGhididIIxP_88RXrmgM_PCp0Grc562CUtEj_Kqb0",
+          "mode": "list",
+          "cachedResultName": "Leads n8n",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1y3QGhididIIxP_88RXrmgM_PCp0Grc562CUtEj_Kqb0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1516121313,
+          "mode": "list",
+          "cachedResultName": "Hoja 2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1y3QGhididIIxP_88RXrmgM_PCp0Grc562CUtEj_Kqb0/edit#gid=1516121313"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Urgencia": "={{ $('Edit Fields').item.json.resultado.urgencia }}",
+            "Categoria": "={{ $('Edit Fields').item.json.resultado.categoria }}",
+            "Resumen": "={{ $('Edit Fields').item.json.resultado.resumen }}",
+            "Mensaje original": "={{ $('Webhook').item.json.body.mensaje }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Categoria",
+              "displayName": "Categoria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Urgencia",
+              "displayName": "Urgencia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Resumen",
+              "displayName": "Resumen",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Mensaje original",
+              "displayName": "Mensaje original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        896,
+        96
+      ],
+      "id": "1fd2774e-9841-4413-8d8f-9e85d0b0c228",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleApi": {
+          "id": "UirFZSJcuEdAtcLe",
+          "name": "Google Service Account account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "e1ba7ed6-e91b-46cf-9f4f-40f9daae9ccd",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "adbb53f65242d56cbd3fd4b500e312ff5abb933c7c908b36485bfe164a81c0ef"
+  },
+  "nodeGroups": [],
+  "id": "DcoWzht1oC8fKFRT",
+  "tags": []
+}
