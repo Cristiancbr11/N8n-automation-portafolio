@@ -18,7 +18,7 @@ Mi objetivo es desarrollar soluciones de automatización que permitan reducir ta
 
 | # | Proyecto | Descripción | Tecnologías |
 |---|---|---|---|
-| 01 | [Formulario y Notificación Asistida por IA](./project-1-telegram-bot/) | Captura de datos vía Webhook/Formulario, procesamiento con IA y envío de alertas por correo. | n8n · Webhooks · OpenAI · Gmail |
+| 01 | [Automatización de Formulario a Notificación](./project-1-telegram-bot/) | Captura de datos mediante formularios web y notificación automática por correo. | n8n · Forms · Webhooks · Gmail |
 | 02 | [Integración de Bot de Telegram con IA](./project-2-telegram-integration/) | Bot interactivo en Telegram asistido por IA capaz de responder mensajes y consultas en tiempo real. | n8n · Telegram API · OpenAI |
 | 03 | [Enrutador Inteligente de Tickets](./project-3-ai-webhook-automation/) | Clasificación y distribución automática de solicitudes según urgencia mediante IA (Gmail y Google Sheets). | n8n · Webhooks · Groq · Gmail · Google Sheets |
 
@@ -32,7 +32,7 @@ Mi objetivo es desarrollar soluciones de automatización que permitan reducir ta
 - 🔄 Automatización de procesos *end-to-end*
 - 📊 Procesamiento, limpieza y transformación de datos (JSON, Edit Fields)
 - 🔀 Lógica condicional y enrutamiento dinámico (Switch)
-- 📩 Integración con correo electrónico (Gmail)
+- 📩 Integración con correo electrónico (Gmail API)
 - 💬 Integración con bots de mensajería (Telegram API)
 - 📋 Operaciones de base de datos e historiales (Google Sheets `Append Row`)
 
