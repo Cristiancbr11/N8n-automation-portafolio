@@ -18,22 +18,22 @@ Mi objetivo es desarrollar soluciones de automatización que permitan reducir ta
 
 | # | Proyecto | Descripción | Tecnologías |
 |---|---|---|---|
-| 01 | [Asistente de IA para Telegram](./project-1-telegram-bot/) | Bot capaz de recibir consultas y generar respuestas mediante IA. | n8n · Telegram · OpenAI |
-| 02 | [Sincronización de formularios con Google Sheets](./project-2-form-to-sheets/) | Captura y automatización de leads provenientes de formularios. | n8n · Forms · Google Sheets |
-| 03 | [Enrutador inteligente de tickets](./project-3-ai-webhook-automation/) | Clasificación y distribución automática de solicitudes mediante IA. | n8n · Webhooks · Groq · Gmail · Google Sheets |
+| 01 | [Formulario y Notificación Asistida por IA](./project-1-telegram-bot/) | Captura de datos vía Webhook/Formulario, procesamiento con IA y envío de alertas por correo. | n8n · Webhooks · OpenAI · Gmail |
+| 02 | [Integración de Bot de Telegram con IA](./project-2-telegram-integration/) | Bot interactivo en Telegram asistido por IA capaz de responder mensajes y consultas en tiempo real. | n8n · Telegram API · OpenAI |
+| 03 | [Enrutador Inteligente de Tickets](./project-3-ai-webhook-automation/) | Clasificación y distribución automática de solicitudes según urgencia mediante IA (Gmail y Google Sheets). | n8n · Webhooks · Groq · Gmail · Google Sheets |
 
 ---
 
 ## 🧠 Habilidades demostradas
 
 - 🔗 Integración de APIs REST
-- 🪝 Webhooks (Entornos Test / Producción)
-- 🤖 Inteligencia Artificial / LLM (Groq, OpenAI)
+- 🪝 Webhooks (Entornos de Test y Producción)
+- 🤖 Inteligencia Artificial / LLMs (Groq, OpenAI)
 - 🔄 Automatización de procesos *end-to-end*
 - 📊 Procesamiento, limpieza y transformación de datos (JSON, Edit Fields)
 - 🔀 Lógica condicional y enrutamiento dinámico (Switch)
 - 📩 Integración con correo electrónico (Gmail)
-- 💬 Integración con bots de mensajería (Telegram)
+- 💬 Integración con bots de mensajería (Telegram API)
 - 📋 Operaciones de base de datos e historiales (Google Sheets `Append Row`)
 
 ---
