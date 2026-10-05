@@ -1,0 +1,125 @@
+{
+  "name": "Proyecto 5 - Manejo Global de Errores",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f42fb18c-7ad1-40ba-9479-c43e682f7a24",
+      "name": "Error Trigger"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5ca4ce06-8ffc-4a8f-9e21-e2426dfe6c26",
+              "name": "workflow_nombre",
+              "value": "={{ $json.workflow.name }}",
+              "type": "string"
+            },
+            {
+              "id": "beeb5965-e5fb-4783-8640-37c1740b4d2e",
+              "name": "execution_id",
+              "value": "={{ $json.execution.id }}",
+              "type": "string"
+            },
+            {
+              "id": "31e661fa-fdd8-44c9-8e88-d03280ec87b5",
+              "name": "nodo_fallido",
+              "value": "={{ $json.execution?.error?.node?.name || 'Nodo no especificado' }}",
+              "type": "string"
+            },
+            {
+              "id": "df0834c9-4fa0-47d4-b341-cb0160151917",
+              "name": "mensaje_error",
+              "value": "={{ $json.execution.error.message }}",
+              "type": "string"
+            },
+            {
+              "id": "5489ffb5-7a57-4a45-85f7-9757a26fa412",
+              "name": "fecha_hora",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "e561c3d7-bb20-441a-8bfc-5d2fe436ca62",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "chatId": "1396414697",
+        "text": "=🚨 *¡ALERTA DE ERROR EN PRODUCCIÓN!*\n\n📌 *Workflow:* {{ $json.workflow_nombre }}\n🆔 *ID Ejecución:* {{ $json.execution_id }}\n💥 *Nodo Afectado:* {{ $json.nodo_fallido }}\n❌ *Mensaje de Error:* {{ $json.mensaje_error }}\n🕒 *Fecha/Hora:* {{ $json.fecha_hora }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        448,
+        0
+      ],
+      "id": "8da413b4-9656-47b0-af76-6c8cf1b8ffbe",
+      "name": "Send a text message",
+      "webhookId": "b514ac26-06c6-4e13-a79e-a23ae6a31ca4",
+      "credentials": {
+        "telegramApi": {
+          "id": "FmUsEs80VR5g8GE6",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "71470f04-8c02-4d8c-acaa-989b8e0e0344",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b51e3e1a203b82605fbb150d7c03ca674e770b6fa05a1121c1812979808c00c0"
+  },
+  "nodeGroups": [],
+  "id": "18OMDdeB1fyQEsbO",
+  "tags": []
+}
