@@ -21,17 +21,20 @@ Mi objetivo es desarrollar soluciones de automatización que permitan reducir ta
 | 01 | [Automatización de Formulario a Notificación](./project-1-telegram-bot/) | Captura de datos mediante formularios web y notificación automática por correo. | n8n · Forms · Webhooks · Gmail |
 | 02 | [Integración de Bot de Telegram con IA](./project-2-telegram-integration/) | Bot interactivo en Telegram asistido por IA capaz de responder mensajes y consultas en tiempo real. | n8n · Telegram API · OpenAI |
 | 03 | [Enrutador Inteligente de Tickets](./project-3-ai-webhook-automation/) | Clasificación y distribución automática de solicitudes según urgencia mediante IA (Gmail y Google Sheets). | n8n · Webhooks · Groq · Gmail · Google Sheets |
+| 04 | [Procesamiento de Datos y Consumo de API](./project-4-api-data-processing/) | Consumo de API REST pública, filtrado condicional de registros y agregación de arreglos de datos masivos. | n8n · Docker · HTTP Request · Filter · Aggregate · JSONPlaceholder API |
 
 ---
 
 ## 🧠 Habilidades demostradas
 
-- 🔗 Integración de APIs REST
+- 🔗 Integración y consumo de APIs REST
 - 🪝 Webhooks (Entornos de Test y Producción)
+- 🐳 Despliegue y ejecución del entorno mediante Docker
 - 🤖 Inteligencia Artificial / LLMs (Groq, OpenAI)
 - 🔄 Automatización de procesos *end-to-end*
 - 📊 Procesamiento, limpieza y transformación de datos (JSON, Edit Fields)
-- 🔀 Lógica condicional y enrutamiento dinámico (Switch)
+- 📦 Manejo de colecciones de datos en lote (Items, Arreglos, Filter, Aggregate)
+- 🔀 Lógica condicional y enrutamiento dinámico (If, Switch)
 - 📩 Integración con correo electrónico (Gmail API)
 - 💬 Integración con bots de mensajería (Telegram API)
 - 📋 Operaciones de base de datos e historiales (Google Sheets `Append Row`)
@@ -41,9 +44,10 @@ Mi objetivo es desarrollar soluciones de automatización que permitan reducir ta
 ## 🛠️ Tecnologías
 
 - n8n
+- Docker
 - APIs REST
 - Webhooks
-- JavaScript
+- JavaScript / Expresiones
 - JSON
 - OpenAI / Groq
 - Telegram
